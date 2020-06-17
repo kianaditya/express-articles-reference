@@ -2,8 +2,8 @@
 const express = require('express')
 const router = express.Router()
 
-router.get('/', (req, res, next) => {
-  res.send('You have hit GET /posts endpoint')
-})
+const postsController = require('../controllers/posts')
+
+router.get('/', postsController.getAllPosts)
 
 module.exports = router
