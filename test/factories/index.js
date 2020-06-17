@@ -7,12 +7,20 @@ factory.cleanUp()
 
 const db = require('../../src/models')
 
-factory.define('Post', db.Posts, async () => {
+factory.define('Post', db.Post, async () => {
   const attrs = {
     id: factory.seq('Post.id'),
     title: factory.chance('sentence', { words: 5 }),
     content: factory.chance('sentence', { words: 15 }),
-    
+  }
+  return attrs
+})
+
+factory.define('User', db.User, async () => {
+  const attrs = {
+    id: factory.seq('User.id'),
+    firstName: factory.chance('first'),
+    lastName: factory.chance('last'),
   }
   return attrs
 })

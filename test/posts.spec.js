@@ -1,4 +1,3 @@
-
 const request = require('supertest')
 const app = require('../src/app') // the express server
 const expect = require('chai').expect
@@ -15,7 +14,10 @@ describe('GET /posts endpoint', () => {
           .to.be.an.instanceof(Array)
           .and.to.have.length(4)
           .and.to.have.property(0)
-          .that.includes.all.keys(['id', 'title', 'content'])
+          .that.includes.all.keys(['id', 'title', 'content', 'author',])
+          .and.to.have.nested.property('author')
+          .to.be.an.instanceof(Object)
+          .that.includes.all.keys(['firstName', 'lastName'])
       })
   })
 })

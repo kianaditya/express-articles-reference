@@ -3,9 +3,11 @@ const db = require('../../src/models')
 
 before(async function () {
   try {
+    const author = await factories.create('User')
     const posts = []
     for (let index = 0; index < 4; index++) {
       const post = await factories.create('Post')
+      author.addAuthor(post)
       posts.push(post)
     }
   } catch (error) {

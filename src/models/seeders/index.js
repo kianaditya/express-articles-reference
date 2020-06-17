@@ -3,6 +3,15 @@ const chance = require('chance').Chance()
 const faker = require('faker')
 
 const createSeeds = async () => {
+  const author1 = await db.User.create({
+    firstName: chance.first(),
+    lastName: chance.last(),
+  })
+
+  const author2 = await db.User.create({
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
+  })
   const postsCount = 3
 
   chance.mixin({
@@ -14,13 +23,15 @@ const createSeeds = async () => {
     },
   })
   for (let index = 0; index < postsCount; index++) {
-    const post = await db.Posts.create(chance.post())
+    const post = await db.Post.create(chance.post())
+    author1.addAuthor(post)
   }
   for (let index = 0; index < postsCount; index++) {
-    const post = await db.Posts.create({
+    const post = await db.Post.create({
       title: faker.lorem.sentence(),
       content: faker.lorem.sentence(),
     })
+    author2.addAuthor(post)
   }
 }
 
