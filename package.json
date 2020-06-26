@@ -1,20 +1,23 @@
 {
   "name": "passport-demo",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Demo to go along with the medium article series",
+  "main": "src/app.js",
   "scripts": {
     "start": "nodemon ./src/app.js",
-    "seed": "node ./src/app.js true",
+    "seed:create": "node ./src/app.js create",
+    "seed:clean": "node ./src/app.js clean",
     "test": "NODE_ENV=test NODE_NO_WARNINGS=1 mocha"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dot-env": "0.0.1",
+    "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
     "pg": "^8.2.1",
     "pg-hstore": "^2.3.3",
     "sequelize": "^5.21.13",

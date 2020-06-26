@@ -21,6 +21,8 @@ factory.define('User', db.User, async () => {
     id: factory.seq('User.id'),
     firstName: factory.chance('first'),
     lastName: factory.chance('last'),
+    email: factory.seq('User.email', (n) => `user${n}@mail.com`),
+    encryptedPassword: 'password',
   }
   return attrs
 })
