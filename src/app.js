@@ -2,24 +2,31 @@ require('dotenv').config()
 
 const express = require('express')
 const logger = require('morgan')
-const db = require('./models')
-const { createSeeds, deleteSeeds } = require('./models/seeders')
+const passport = require('passport')
 
 const app = express()
 const PORT = process.env.PORT
 
 app.use(logger('dev'))
 
-app.use(express.json()) //http://expressjs.com/en/api.html#express.json
-app.use(express.urlencoded({ extended: false })) //http://expressjs.com/en/5x/api.html#express.urlencoded
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
 
+app.use(passport.initialize())
+app.use(passport.session())
+require('./auth/passport-jwt')(passport)
+
+const db = require('./models')
+const { createSeeds, deleteSeeds } = require('./models/seeders')
 const auth = require('./auth')
-const postRouter = require('./routes/posts')
-const passport = require('passport')
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(auth)
+
+const postRouter = require('./routes/posts')
 app.use('/posts', postRouter)
+
+const userRouter = require('./routes/users')
+app.use('/user', passport.authenticate('jwt', { session: false }), userRouter)
+
 const seed = process.argv[2]
 if (seed) {
   db.sequelize

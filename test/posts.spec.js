@@ -12,7 +12,7 @@ describe('GET /posts endpoint', () => {
         expect(response.statusCode).to.equal(200)
         expect(response.body)
           .to.be.an.instanceof(Array)
-          .and.to.have.length(4)
+          .and.to.have.length(8)
           .and.to.have.property(0)
           .that.includes.all.keys(['id', 'title', 'content', 'author',])
           .and.to.have.nested.property('author')

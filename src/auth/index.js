@@ -1,8 +1,11 @@
-// const jwt = require('jsonwebtoken')
 const express = require('express')
-// const secret = process.env.SECRET || 'some other secret as default'
+
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
+
+const jwt = require('jsonwebtoken')
+const secret = 'secret'
+
 const db = require('../models')
 const router = express.Router()
 
@@ -32,7 +35,13 @@ passport.use(
 )
 
 router.post('/login', passport.authenticate('local'), async (req, res) => {
-  res.status(200).send()
+  const payload = {
+    email: req.user.email,
+  }
+  const token = await jwt.sign(payload, secret, { expiresIn: 36000 })
+  res.status(200).send({
+    token: `JWT ${token}`,
+  })
 })
 
 module.exports = router

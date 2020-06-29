@@ -10,6 +10,9 @@ describe('POST /login endpoint', async () => {
         .send({ email: 'author@mail.com', password: 'password' })
         .then((response) => {
           expect(response.statusCode).to.equal(200)
+          expect(response.body)
+            .to.be.an.instanceof(Object)
+            .that.includes.key('token')
         })
     } catch (error) {
       console.log(error)
@@ -19,7 +22,7 @@ describe('POST /login endpoint', async () => {
     try {
       return await request(app)
         .post('/login')
-        .send({ email: 'author2@mail.com', password: 'password' })
+        .send({ email: 'author5@mail.com', password: 'password' })
         .then((response) => {
           expect(response.statusCode).to.equal(401)
         })
