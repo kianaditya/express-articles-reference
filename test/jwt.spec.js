@@ -2,7 +2,7 @@ const request = require('supertest')
 const app = require('../src/app')
 const expect = require('chai').expect
 
-describe('GET /user endpoint', async () => {
+describe.only('GET /user endpoint', async () => {
   it('GET /user endpoint success', async () => {
     try {
       const authResponse = await request(app)
@@ -14,10 +14,19 @@ describe('GET /user endpoint', async () => {
         Authorization: token,
       })
       expect(response.statusCode).to.equal(200)
+
       expect(response.body)
         .to.be.an.instanceof(Object)
         .that.includes.all.keys(['firstName', 'lastName'])
-        .and.to.have.property('author')
+        .and.to.have.property('Written')
+        .to.be.an.instanceof(Array)
+        .and.to.have.length(4)
+        .and.to.have.property(0)
+        .to.be.an.instanceof(Object)
+        .that.includes.all.keys(['id', 'title', 'content'])
+
+      expect(response.body)
+        .and.to.have.property('Saved')
         .to.be.an.instanceof(Array)
         .and.to.have.length(4)
         .and.to.have.property(0)

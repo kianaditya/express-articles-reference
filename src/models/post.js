@@ -9,7 +9,8 @@ module.exports = (sequelize, DataTypes) => {
     {}
   )
   Post.associate = function (models) {
-    Post.belongsTo(models.User, { as: 'author', foreignKey: 'AuthorId' })
+    Post.belongsTo(models.User, { as: 'Author', foreignKey: 'AuthorId' })
+    Post.belongsToMany(models.User, { through: 'SavedPosts', as: 'savedBy' })
   }
   return Post
 }

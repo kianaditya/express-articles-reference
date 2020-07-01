@@ -20,7 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     {}
   )
   User.associate = function (models) {
-    User.hasMany(models.Post, { as: 'author', foreignKey: 'AuthorId' })
+    User.hasMany(models.Post, { as: 'Written', foreignKey: 'AuthorId' })
+    User.belongsToMany(models.Post, { through: 'SavedPosts', as: 'Saved' })
   }
   User.beforeCreate(async function (user, options) {
     const password = await cryptPassword(user.encryptedPassword)

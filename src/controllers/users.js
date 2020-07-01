@@ -7,8 +7,16 @@ exports.getUser = async (req, res, next) => {
     include: [
       {
         model: db.Post,
-        as: 'author',
+        as: 'Written',
         attributes: ['id', 'title', 'content'],
+      },
+      {
+        model: db.Post,
+        as: 'Saved',
+        attributes: ['id', 'title', 'content'],
+        through: {
+          attributes: [],
+        },
       },
     ],
   })

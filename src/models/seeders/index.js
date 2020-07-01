@@ -16,6 +16,14 @@ const createSeeds = async () => {
     email: 'author2@mail.com',
     encryptedPassword: 'password',
   })
+
+  const reader = await db.User.create({
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
+    email: 'reader@mail.com',
+    encryptedPassword: 'password',
+  })
+
   const postsCount = 3
 
   chance.mixin({
@@ -29,6 +37,8 @@ const createSeeds = async () => {
   for (let index = 0; index < postsCount; index++) {
     const post = await db.Post.create(chance.post())
     author1.addAuthor(post)
+    author2.addSaved(post)
+    reader.addSaved(post)
   }
   for (let index = 0; index < postsCount; index++) {
     const post = await db.Post.create({
@@ -36,6 +46,8 @@ const createSeeds = async () => {
       content: faker.lorem.sentence(),
     })
     author2.addAuthor(post)
+    author1.addSaved(post)
+    reader.addSaved(post)
   }
 }
 
