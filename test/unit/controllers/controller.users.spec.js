@@ -1,9 +1,9 @@
 const sinon = require('sinon')
 const expect = require('chai').expect
 
-const db = require('../../src/models')
+const db = require('../../../src/models')
 
-const { getUser } = require('../../src/controllers/users')
+const { getUser } = require('../../../src/controllers/users')
 
 describe('Users Controller', () => {
   const user = {}

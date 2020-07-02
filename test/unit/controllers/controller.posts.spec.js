@@ -1,8 +1,8 @@
 const sinon = require('sinon')
 const expect = require('chai').expect
 
-const db = require('../../src/models')
-const { getAllPosts, getSpecificPost } = require('../../src/controllers/posts')
+const db = require('../../../src/models')
+const { getAllPosts, getSpecificPost } = require('../../../src/controllers/posts')
 
 describe('Posts controller', () => {
   const posts = []

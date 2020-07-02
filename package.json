@@ -33,7 +33,9 @@
     "mocha": "^8.0.1",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.4",
+    "sequelize-test-helpers": "^1.2.2",
     "sinon": "^9.0.2",
+    "sinon-chai": "^3.5.0",
     "supertest": "^4.0.2"
   }
 }
