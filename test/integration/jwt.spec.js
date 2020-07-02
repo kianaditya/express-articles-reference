@@ -1,8 +1,8 @@
 const request = require('supertest')
-const app = require('../src/app')
+const app = require('../../src/app')
 const expect = require('chai').expect
 
-describe.only('GET /user endpoint', async () => {
+describe('GET /user endpoint', async () => {
   it('GET /user endpoint success', async () => {
     try {
       const authResponse = await request(app)
