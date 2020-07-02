@@ -1,13 +1,13 @@
 require('dotenv').config()
 
 const express = require('express')
-const logger = require('morgan')
+// const logger = require('morgan')
 const passport = require('passport')
 
 const app = express()
 const PORT = process.env.PORT
 
-app.use(logger('dev'))
+// app.use(logger('dev'))
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))

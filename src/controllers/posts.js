@@ -1,6 +1,6 @@
 const db = require('../models')
 
-const getAllPosts = async (req, res, next) => {
+const getAllPosts = async (req, res) => {
   const allPosts = await db.Post.findAll({
     attributes: ['id', 'title', 'content'],
     include: [
@@ -14,7 +14,7 @@ const getAllPosts = async (req, res, next) => {
   res.status(200).send(allPosts)
 }
 
-const getSpecificPost = async (req, res, next) => {
+const getSpecificPost = async (req, res) => {
   const postId = req.params.id
   const specificPost = await db.Post.findOne({
     where: {
