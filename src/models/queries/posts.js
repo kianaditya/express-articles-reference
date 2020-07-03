@@ -1,4 +1,4 @@
-const db = require('../models')
+const db = require('../index')
 
 const getAllPosts = async () => {
   const allPosts = await db.Post.findAll({

@@ -1,4 +1,4 @@
-const db = require('../models')
+const db = require('../index')
 
 const getUser = async (email) => {
   const user = await db.User.findOne({

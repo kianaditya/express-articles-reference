@@ -1,7 +1,8 @@
-const { getUser } = require('../queries')
+const queries = require('../models/queries')
 
 const show = async (req, res) => {
-  const user = await getUser(req.user.email)
+  const email = req.user.email
+  const user = await queries.getUser(email)
   res.status(200).send(user)
 }
 

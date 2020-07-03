@@ -1,23 +1,23 @@
 const sinon = require('sinon')
 const expect = require('chai').expect
 
-const db = require('../../../src/models')
-const { getAllPosts, getSpecificPost } = require('../../../src/controllers/posts')
+const queries = require('../../../src/models/queries')
+const { index, show } = require('../../../src/controllers/posts')
 
 describe('Posts controller', () => {
   const posts = []
   const specificPost = {}
 
   describe('GET Posts', () => {
-    it('should use findAll() and send response', async () => {
-      const findAll = sinon.stub(db.Post, 'findAll').resolves(posts)
+    it('should use index action and send response', async () => {
+      const findAll = sinon.stub(queries, 'getAllPosts').resolves(posts)
       let resSpy = sinon.spy()
       const req = {}
       const res = {
         status: sinon.stub().returns({ send: resSpy }),
       }
 
-      await getAllPosts(req, res)
+      await index(req, res)
 
       expect(findAll.calledOnce).to.equal(true)
       expect(resSpy.calledOnce).to.equal(true)
@@ -28,8 +28,10 @@ describe('Posts controller', () => {
   })
 
   describe('GET specific post', () => {
-    it('should use findOne() and send response', async () => {
-      const findOne = sinon.stub(db.Post, 'findOne').resolves(specificPost)
+    it('should use show action and send response', async () => {
+      const findOne = sinon
+        .stub(queries, 'getSpecificPost')
+        .resolves(specificPost)
       let resSpy = sinon.spy()
       const req = {
         params: {
@@ -45,7 +47,7 @@ describe('Posts controller', () => {
       }
 
       const spy = sinon.spy(res, 'status')
-      await getSpecificPost(req, res)
+      await show(req, res)
 
       expect(findOne.calledOnce).to.equal(true)
       expect(spy.calledOnce).to.equal(true)
