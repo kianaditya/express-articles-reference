@@ -30,7 +30,7 @@
     "chance": "^1.1.6",
     "factory-girl": "^5.0.4",
     "faker": "^4.1.0",
-    "mocha": "^8.0.1",
+    "mocha": "^8.4.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.4",
     "sequelize-test-helpers": "^1.2.2",
